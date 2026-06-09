@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, ArrowLeftRight, BarChart2, Tag, LogOut } from 'lucide-react'
+import { LayoutDashboard, ArrowLeftRight, BarChart2, Tag, LogOut, Sun, Moon } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -10,17 +11,27 @@ const navItems = [
 
 const Sidebar = () => {
   const navigate = useNavigate()
+  const { isDark, toggleTheme } = useTheme()
 
   return (
-    <div className="h-screen w-60 flex flex-col fixed left-0 top-0 bg-[#0e1726] border-r border-white/5">
+    <div className="h-screen w-64 flex flex-col fixed left-0 top-0 bg-[#0d1117] border-r border-white/5">
 
       {/* Logo */}
       <div className="px-6 py-6 border-b border-white/5">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
-            <span className="text-white font-bold text-sm">ET</span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
+              <span className="text-white font-bold text-sm">₹</span>
+            </div>
+            <span className="text-white font-semibold text-sm tracking-wide">ExpenseTracker</span>
           </div>
-          <span className="text-white font-semibold text-sm tracking-wide">ExpenseTracker</span>
+          {/* Dark mode toggle */}
+          <button
+            onClick={toggleTheme}
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+          >
+            {isDark ? <Sun size={14} /> : <Moon size={14} />}
+          </button>
         </div>
       </div>
 
@@ -34,8 +45,8 @@ const Sidebar = () => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all
               ${isActive
-                ? 'bg-emerald-500/10 text-emerald-400 font-medium'
-                : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
+                ? 'bg-emerald-500/10 text-emerald-400 font-medium border-l-2 border-emerald-400'
+                : 'text-gray-500 hover:text-gray-300 hover:bg-white/5 border-l-2 border-transparent'
               }`
             }
           >

@@ -7,10 +7,12 @@
 @layer base {
   * {
     font-family: 'Inter', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
   }
   body {
     background-color: #f5f6fa;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  }
+  .dark body {
+    background-color: #0d1117;
   }
 }
